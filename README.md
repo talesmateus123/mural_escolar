@@ -1,4 +1,4 @@
-# Projeto EJS Template
+# Castro Agenda
 
 Um template de projeto fullstack construído com **Express.js** e **EJS** (Embedded JavaScript Templating), pré-configurado para conectar-se com banco de dados **MySQL** e gerenciar variáveis de ambiente de forma segura.
 
@@ -61,7 +61,7 @@ Qualquer alteração nos arquivos será detectada automaticamente pelo Nodemon, 
 ## 📚 Estrutura do Projeto
 
 ```
-projeto-ejs/
+castroagenda/
 ├── server.js          # Arquivo principal do servidor
 ├── routes.js          # Definição de rotas
 ├── database.js        # Configuração do MySQL
