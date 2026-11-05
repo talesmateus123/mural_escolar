@@ -5,6 +5,7 @@ const app = express();
 // ROTAS
 
 // Página inicial
+
 app.get('/', async (req, res) => {
     const avisos = [
         {
@@ -53,7 +54,7 @@ app.get('/', async (req, res) => {
         }
     ];
 
-    res.render('index', { titulo: 'Castro Agenda', avisos });
+    res.render('index', { basePath: '/profissao', titulo: 'Castro Agenda', avisos });
 });
 
 export default app;
