@@ -1,30 +1,34 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import app from './routes.js';
-
-
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import router from './routes.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 dotenv.config();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3003;
+const BASE = '/profissao';
 
-// Middleware para servir arquivos estáticos (CSS, JS, imagens)
-// app.use(express.static('public'));
-app.use('/mural', express.static(join(__dirname, 'public')));
+const app = express();
 
-// Middleware para parsear dados do formulário
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+// Assets sob /profissao  →  /profissao/css/..., /profissao/js/...
+app.use(BASE, express.static(join(__dirname, 'public')));
 
-// Configurar o EJS como motor de templates
+// Parse do body (formulário) sob /profissao
+app.use(BASE, express.urlencoded({ extended: true }));
+app.use(BASE, express.json());
+
+// EJS
 app.set('view engine', 'ejs');
+app.set('views', join(__dirname, 'views'));
+app.locals.basePath = BASE;
 
-// Iniciar servidor
+// Rotas do router sob /profissao
+app.use(BASE, router);
+
 app.listen(port, () => {
-    console.log(`Servidor rodando em http://localhost:${port}`);
+    console.log(`Servidor rodando em http://localhost:${port}${BASE}`);
 });
